@@ -1,53 +1,26 @@
 #include <iostream>
 using namespace std;
-int main ()
+
+int main()
 {
-    // Define Variables
+    int number = 43; //correct number
+    int guess = 0; // number the user guesses
 
-    int number = 24;
-    int attempts = 1;
+    cout << "please enter a number between 1 - 100..." << endl;
 
-    // Guess
-    cout<< " Guess a number between 1 and 100."<< endl;
-    cin >> number;
+    while (guess != number){
+    cin >> guess;
 
-    while (number != 24)
-        {
-
-    // If/When the number is too low
-    while (number < 24)
-
-    {
-
-        cout << "This number is too low" << endl;
-        cout << "Guess Again" << endl;
-        cin >> number;
-
-    attempts++;
-
+    if (guess > number){
+        cout << "Sorry, it's too high. Please try again." << endl;
     }
 
-    // If/When the number is too high
-    if ( number > 24) {
-
-        cout << "This number is too high" << endl;
-        cout << " Guess Again" << endl;
-        cin >> number;
-
-     attempts++;
-
-    }
+    else if (guess < number){
+         cout << "Sorry, it's too low. Please try again." << endl;
     }
 
-    //If/When the number is correct
-     if (number == 24) {
-
-        cout << "Correct. This is the right number" << endl;
-
-        cout << attempts<<" Attempt(s)" << endl;
-     }
-
-    return 0;
-    cout << attempts << endl;
-
+    else {
+        cout << "Congrats!!! You guessed it correctly!!!" << endl;
+    }
+  }
 }
