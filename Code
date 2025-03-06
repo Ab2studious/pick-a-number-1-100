@@ -1,26 +1,58 @@
 #include <iostream>
-using namespace std;
+#include <cstdlib>
+#include <ctime>
+#include <cmath>  // For round()
 
-int main()
-{
-    int number = 43; //correct number
-    int guess = 0; // number the user guesses
 
-    cout << "please enter a number between 1 - 100..." << endl;
+int main() {
+    // Initialize random number generator
+    std::srand(std::time(0));
 
-    while (guess != number){
-    cin >> guess;
+    // Generate a random number between 1 and 100
+    int targetNumber = std::rand() % 100 + 1;
 
-    if (guess > number){
-        cout << "Sorry, it's too high. Please try again." << endl;
+    int guess;
+    int attempts = 0;
+
+    std::cout << "Welcome to Guess the Number!" << std::endl;
+    std::cout << "I have selected a number between 1 and 100." << std::endl;
+    std::cout << "Try to guess it!" << std::endl;
+
+    // Start the guessing loop
+    while (true) {
+        std::cout << "Enter your guess (if you enter a decimal, it will be rounded): ";
+        double userInput;
+        std::cin >> userInput;
+
+        // Round the input to the nearest whole number
+        guess = std::round(userInput);
+
+          //This determines whether a guess is an allowed integer or not
+        if (std::cin.fail()){
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
+                std::cout<<"\nYour guess must be an actual number!"<<std::endl;
+            }
+
+
+        // Inform the user if their guess was rounded
+        if (userInput != guess) {
+            std::cout << "Your input was rounded to " << guess << "." << std::endl;
+        }
+
+        // Count the number of attempts
+        attempts++;
+
+        // Provide feedback based on the rounded guess
+        if (guess < targetNumber) {
+            std::cout << "Too low! Try again." << std::endl;
+        } else if (guess > targetNumber) {
+            std::cout << "Too high! Try again." << std::endl;
+        } else {
+            std::cout << "Congratulations! You've guessed the number " << targetNumber << " in " << attempts << " attempts!" << std::endl;
+            break;
+        }
     }
 
-    else if (guess < number){
-         cout << "Sorry, it's too low. Please try again." << endl;
-    }
-
-    else {
-        cout << "Congrats!!! You guessed it correctly!!!" << endl;
-    }
-  }
+    return 0;
 }
